@@ -22,7 +22,7 @@ gem 'turbolinks', '~> 5'
 # gem 'redis', '~> 3.0'
 
 # Use discordrb to interact with the discord API
-gem 'discordrb'
+gem 'discordrb', github: "meew0/discordrb"
 
 # Use dotenv-rails to manage credentials via .env files
 gem 'dotenv-rails'
