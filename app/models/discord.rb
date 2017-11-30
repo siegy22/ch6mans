@@ -1,5 +1,8 @@
 module Discord
   COMMANDS = {
+    ping: {
+      description: 'Test if bot is alive.',
+    },
     queue: {
       min_args: 0,
       max_args: 0,
@@ -29,7 +32,7 @@ module Discord
       max_args: 1,
       description: '[Admin only] Remove user out of the channel\'s queue.',
       usage: '!remove [user]',
-    }
+    },
   }.freeze
 
   ADMIN_ROLES = ENV.fetch('DISCORD_ADMIN_ROLES', '')

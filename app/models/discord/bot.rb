@@ -76,6 +76,10 @@ module Discord
       end
     end
 
+    def ping(_event, *_args)
+      'pong!'
+    end
+
     private
     def admin_user?(user)
       user.roles.any? { |role| ADMIN_ROLES.include?(role.id) }
