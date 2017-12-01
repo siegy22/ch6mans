@@ -37,9 +37,9 @@ module Discord
     def status(event)
       queue = @queues[event.channel]
       if queue.present? && queue.users.any?
-        event << queue.status
+        queue.status
       else
-        event << 'There\'s no queue in the current channel, use `!queue` to create a new one.'
+        'There\'s no queue in the current channel, use `!queue` to create a new one.'
       end
     end
 
@@ -47,6 +47,7 @@ module Discord
       queue = @queues[event.channel]
       event << "#{event.user.mention} left successfully." if queue.delete(event.user)
       @queues[event.channel] = queue
+      nil
     end
 
     def stop(event)
@@ -56,9 +57,9 @@ module Discord
       if queue.present? && queue.users.any?
         queue.stop
         @queues[event.channel] = queue
-        event << 'Queue has been stopped.'
+        'Queue has been stopped.'
       else
-        event << 'Sorry, no queue found.'
+        'Sorry, no queue found.'
       end
     end
 
