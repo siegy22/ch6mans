@@ -2,7 +2,15 @@ module Discord
   class PlayerQueue
     REQUIRED_PLAYERS = 6
 
-    attr_reader :users
+    @@queues = {}
+
+    def self.find_or_create(channel)
+      @@queues.fetch(channel) do
+        queue = PlayerQueue.new
+        @@queues[channel] = queue
+        queue
+      end
+    end
 
     def initialize
       @users = Set.new
@@ -21,7 +29,7 @@ module Discord
     end
 
     def status
-      "In queue right now: #{users.map(&:name).join(', ')}"
+      "In queue right now: #{@users.map(&:name).join(', ')}"
     end
 
     def on_ready(&block)
@@ -32,8 +40,12 @@ module Discord
       @on_player_joined = block
     end
 
-    def stop
+    def stop!
       @users = []
+    end
+
+    def active?
+      @users.any?
     end
 
     private
