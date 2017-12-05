@@ -6,7 +6,9 @@ module Discord
       }
 
       def execute(event, *_args)
-        event << 'pong!'
+        File.open(Rails.root.join('app/assets/images/party.gif')) do |file|
+          event.channel.send_file(file)
+        end
       end
     end
   end
