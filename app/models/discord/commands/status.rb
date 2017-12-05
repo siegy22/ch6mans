@@ -10,11 +10,7 @@ module Discord
 
       def execute(event, *_args)
         queue = PlayerQueue.find_or_create(event.channel)
-        if queue.active?
-          event << queue.status
-        else
-          event << 'There\'s no queue in the current channel, use `!queue` to create a new one.'
-        end
+        event.channel.send_embed('', queue.to_embed)
       end
     end
   end
